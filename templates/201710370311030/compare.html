@@ -1,0 +1,381 @@
+<style>
+  input[type="checkbox"][id^="checkbox-select-img-patch"] {
+    display: none;
+  }
+
+  label.img-patch {
+    /* border: 1px solid #fff;
+    padding: 10px; */
+    display: block;
+    position: relative;
+    /* margin: 10px; */
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  label.img-patch::before {
+    background-color: white;
+    color: white;
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    border: 1px solid grey;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 28px;
+    transition-duration: 0.4s;
+    transform: scale(0);
+  }
+
+  label.img-patch img {
+    height: 100px;
+    width: 100px;
+    transition-duration: 0.2s;
+    transform-origin: 50% 50%;
+  }
+
+  :checked+label.img-patch {
+    /* border-color: #ddd; */
+  }
+
+  :checked+label.img-patch::before {
+    content: "✓";
+    background-color: grey;
+    transform: scale(1);
+  }
+
+  :checked+label.img-patch img {
+    transform: scale(0.95);
+    /* box-shadow: 0 0 5px #333; */
+    z-index: -1;
+  }
+
+  #image-preview-patchA,
+  #image-preview-patchB {
+    display: none;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+</style>
+
+{% extends 'base.html' %}
+{% block content %}
+<!-- page-title -->
+<section class="page-title centred" style="background-image: url(../static/main/images/background/page-title.jpg);">
+  <div class="container">
+    <div class="content-box">
+      <div class="title">Research Product Details</div>
+      <ul class="bread-crumb">
+        <li><a href="https://riset.informatika.umm.ac.id">Home</a></li>
+        <li><a href="https://riset.informatika.umm.ac.id/area_of_interest/1">Data Science</a></li>
+        <li><a href="https://riset.informatika.umm.ac.id/area_of_interest/topics/1">Research Topics</a></li>
+        <!-- EDIT START-->
+        <li><a href="https://riset.informatika.umm.ac.id/area_of_interest/topics/1/all">Batik GAN</a></li>
+        <li><a href="/1/generate">Generate</a></li>
+
+        <!-- EDIT END -->
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- page-title end -->
+
+<!-- form-section -->
+<section class="contact-section" style="padding-top:50px;" id="predict1">
+  <div class="container">
+    <div class="title-box centred">
+      <div class="sec-title"><a class="sec-title" href="#predict1">Upload an Image</a> / <a class="sec-title"
+          href="#predict">Select an Image</a><br> to Classify</div><br>
+    </div>
+    <!-- EDIT START-->
+    <form class="login100-form validate-form" action="/1/pred_comps" method=post enctype=multipart/form-data>
+      <!-- EDIT END -->
+      <div class="row" style=" width: 100%; margin: auto; padding: 15px;">
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <p style="font-weight: bold; color: black;">Compare Model : </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <div class="checkboxes">
+              <!-- EDIT START-->
+              <input type="hidden" name="select_model" id="chose_model" value="GAN_C1">
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C1' checked disabled />
+                <span>BatikGAN SL C-1 </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C10' />
+                <span>BatikGAN SL C-10 </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C100' />
+                <span>BatikGAN SL C-100</span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_AUG' />
+                <span>BatikGAN SL Augmentation </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_NO_AUG' />
+                <span>BatikGAN SL No Augmentation </span>
+              </label>
+              <!-- EDIT END -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <img id="image-preview-patchA" alt="image preview patch A" src="#" style="width: 10%;" />
+      <img id="image-preview-patchB" alt="image preview patch B" src="#" style="width: 10%;" />
+      <div class="container-login100-form-btn">
+        <label for="image-source-patchA">Patch A</label>
+        <div class="wrap-input100 validate-input" data-validate="Image file patch A is required" id="input">
+          <input class="input100" id="image-source-patchA" name="patchA" onchange="previewImagePatchA();" type="file"
+            alt="Input Image" accept="image/jpeg,image/jpg,image/png">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-file" aria-hidden="true"></i>
+          </span>
+        </div>
+        <label for="image-source-patchB">Patch B</label>
+        <div class="wrap-input100 validate-input" data-validate="Image file patch B is required" id="input">
+          <input class="input100" id="image-source-patchB" name="patchB" onchange="previewImagePatchB();" type="file"
+            alt="Input Image" accept="image/jpeg,image/jpg,image/png">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-file" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" id="send" type="submit">
+          Execute
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- form-section end -->
+
+<!-- grid-section -->
+<section class="contact-section centred" style="padding-top:100px;" id="predict">
+  <div class="container">
+    <div class="title-box centred">
+      <div class="sec-title">Select Patch Image to Generate Batik</div><br>
+    </div>
+    <!-- EDIT START-->
+    <form action="/1/pred_comp" method="POST" onsubmit="return selectImageRequire()">
+      <!-- EDIT END -->
+      <div class="row" style=" width: 100%; margin: auto; padding: 15px;">
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <p style="font-weight: bold; color: black;">Compare Model : </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <div class="checkboxes">
+              <!-- EDIT START-->
+              <input type="hidden" name="select_model" id="chose_model" value="GAN_C1">
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C1' checked disabled />
+                <span>BatikGAN SL C-1 </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C10' />
+                <span>BatikGAN SL C-10 </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_C100' />
+                <span>BatikGAN SL C-100</span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_AUG' />
+                <span>BatikGAN SL Augmentation </span>
+              </label>
+              <label style="padding-left:2em">
+                <input name="select_model" type="checkbox" id="chose_model" value='GAN_NO_AUG' />
+                <span>BatikGAN SL No Augmentation </span>
+              </label>
+              <!-- EDIT END -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- EDIT START-->
+      <div class="row">
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch1" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar1.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch1">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar1.jpg')}}" />
+          </label>
+
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch2" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar2.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch2">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar2.jpg')}}" />
+          </label>
+
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch3" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar3.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch3">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar3.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch4" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar4.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch4">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar4.jpg')}}" />
+          </label>
+
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch5" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar5.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch5">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar5.jpg')}}" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch6" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar6.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch6">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar6.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch7" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar7.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch7">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar7.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch8" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar8.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch8">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar8.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch9" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar9.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch9">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar9.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch10" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/gambar10.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch10">
+            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar10.jpg')}}" />
+          </label>
+        </div>
+      </div>
+      <div class="row" style=" width: 29%; padding: 15px;">
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <p style="font-weight: bold; color: black;">Evaluate FID : </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <input type="radio" name="is_evaluate_fid" id="option_1" value="no" checked style="margin-right: 5px;">
+            <label for="option_1">No</label>
+            <input type="radio" name="is_evaluate_fid" id="option_2" value="yes"
+              style="margin-left: 10px;margin-right: 5px;">
+            <label for="option_2">Yes</label>
+          </div>
+        </div>
+        <p>Note : Evaluation can make the waiting time longer.</p>
+      </div>
+      <!-- EDIT END -->
+      <div class="container-login100-form-btn">
+        <button class="login100-form-btn" id="send" type="submit">
+          Execute
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<!-- grid-section end -->
+
+<script>
+  var checks = document.querySelectorAll(".checkbox-img-patch");
+  var max = 2;
+  for (var i = 0; i < checks.length; i++)
+    checks[i].onclick = selectiveCheck;
+  function selectiveCheck(event) {
+    var checkedChecks = document.querySelectorAll(".checkbox-img-patch:checked");
+    if (checkedChecks.length >= max + 1)
+      return false;
+  }
+
+
+  function selectImageRequire() {
+    var inputElems = document.getElementsByName("select_image_patch")
+    count = 0;
+    for (var i = 0; i < inputElems.length; i++) {
+      if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) {
+        count++;
+      }
+    }
+    if (count !== 2) {
+      alert('Select 2 patch image batik.')
+      return false;
+    }
+    return true;
+  };
+
+
+  function previewImagePatchA() {
+    document.getElementById("image-preview-patchA").style.display = "inline";
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById("image-source-patchA").files[0]);
+
+    oFReader.onload = function (oFREvent) {
+      document.getElementById("image-preview-patchA").src = oFREvent.target.result;
+    };
+  };
+
+  function previewImagePatchB() {
+    document.getElementById("image-preview-patchB").style.display = "inline";
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById("image-source-patchB").files[0]);
+
+    oFReader.onload = function (oFREvent) {
+      document.getElementById("image-preview-patchB").src = oFREvent.target.result;
+    };
+  };
+</script>
+
+{% endblock %}
