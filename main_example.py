@@ -82,27 +82,9 @@ def f_201710370311030_predict_compare():  # Ganti nim dengan NIM anda misal : _2
     # load dataset
     dataset = DataPipeline().execute()
 
-    # img = cv2.cvtColor(
-    #     np.array(np.array(Image.open(filename))), cv2.COLOR_BGR2RGB
-    # )
-
-    # Isi dengan Nama model dan path lokasi model disimpan (Pastikan menyimpan model dalam folder /static/model/nim/namamodel.h5)
-    # Jika pakai Json dan weight model saat menyimpan model gunakan kode ini
-    # Beri kode nama "_js" tanpa petik di akhir nama model
-
     for m in chosen_model:
-        # if "_js" in m:  # dari kode nama model _js selanjutnya program akan membaca model format json dengan block kode dalam if
-        #     json_file = open(model_dict[m][0], 'r')
-        #     loaded_model_json = json_file.read()
-        #     json_file.close()
-        #     model = model_from_json(loaded_model_json)
-        #     model.load_weights(model_dict[m][1])
-        # else:  # bila nama model tidak mengandung kode nama _js maka model akan di muat menggunakan load_model()
+        
         model = load_model(model_dict[m])
-
-        # preprocessing gambar lakukan sesuai dengan preprocessing yang sama saat proses training
-        # imgs = np.expand_dims(cv2.resize(img, model.layers[0].input_shape[0][1:3] if not model.layers[
-        #                       0].input_shape[1:3] else model.layers[0].input_shape[1:3]).astype('float32') / 255, axis=0)
 
         # mulai prediksi
         start = time.time()
@@ -122,11 +104,7 @@ def f_201710370311030_predict_compare():  # Ganti nim dengan NIM anda misal : _2
         )
         dir_result_img.append("result/201710370311030/{}.png".format(m))
         running_time.append(round(time.time()-start, 4)
-                            )  # hitung waktu prediksi
-        # respon_model.append([round(elem * 100, 2)
-        #                     for elem in pred])  # hitung nilai prediksi
-
-    # return str("fid_global: {} \n fid_local: {}".format(fid_global, fid_local))
+                            )  
     return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "no")
 
 
@@ -173,53 +151,13 @@ def f_201710370311030_predicts_compare():
     # load dataset
     dataset = DataPipeline().execute()
 
-    # for m in chosen_model:
-    #     if "_js" in m:  # dari kode nama model _js selanjutnya program akan membaca model format json dengan block kode dalam if
-    #         json_file = open(model_dict[m][0], 'r')
-    #         loaded_model_json = json_file.read()
-    #         json_file.close()
-    #         model = model_from_json(loaded_model_json)
-    #         model.load_weights(model_dict[m][1])
-    #     else:  # bila nama model tidak mengandung kode nama _js maka model akan di muat menggunakan load_model()
-    #         model = load_model(model_dict[m])
-
-    #     # preprocessing gambar lakukan sesuai dengan preprocessing yang sama saat proses training
-    #     imgs = np.expand_dims(cv2.resize(img, model.layers[0].input_shape[0][1:3] if not model.layers[
-    #                           0].input_shape[1:3] else model.layers[0].input_shape[1:3]).astype('float32') / 255, axis=0)
-
-    #     # mulai prediksi
-    #     start = time.time()
-    #     pred = model.predict(imgs)[0]
-    #     running_time.append(round(time.time()-start, 4)
-    #                         )  # hitung waktu prediksi
-    #     respon_model.append([round(elem * 100, 2)
-    #                         for elem in pred])  # hitung nilai prediksi
-
-    # return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, 'temp.jpg')
     for m in chosen_model:
-        # if "_js" in m:  # dari kode nama model _js selanjutnya program akan membaca model format json dengan block kode dalam if
-        #     json_file = open(model_dict[m][0], 'r')
-        #     loaded_model_json = json_file.read()
-        #     json_file.close()
-        #     model = model_from_json(loaded_model_json)
-        #     model.load_weights(model_dict[m][1])
-        # else:  # bila nama model tidak mengandung kode nama _js maka model akan di muat menggunakan load_model()
+        
         model = load_model(model_dict[m])
-
-        # preprocessing gambar lakukan sesuai dengan preprocessing yang sama saat proses training
-        # imgs = np.expand_dims(cv2.resize(img, model.layers[0].input_shape[0][1:3] if not model.layers[
-        #                       0].input_shape[1:3] else model.layers[0].input_shape[1:3]).astype('float32') / 255, axis=0)
 
         # mulai prediksi
         start = time.time()
         img_generate = model([patchA, patchB])
-
-        # evaluate result batik generate
-        # if is_evaluate == "yes":
-        #   evaluate = Evaluation(dataset=dataset, model=model)
-        #   _fid_local, _fid_global = evaluate.fid(patchA, patchB, img_generate)
-        #   fid_local.append(round(_fid_local,2))
-        #   fid_global.append(round(_fid_global,2))
 
         # save result batik generate to directory
         prediction = image.array_to_img(img_generate[0])
@@ -228,11 +166,7 @@ def f_201710370311030_predicts_compare():
         )
         dir_result_img.append("result/201710370311030/{}.png".format(m))
         running_time.append(round(time.time()-start, 4)
-                            )  # hitung waktu prediksi
-        # respon_model.append([round(elem * 100, 2)
-        #                     for elem in pred])  # hitung nilai prediksi
-
-    # return str("fid_global: {} \n fid_local: {}".format(fid_global, fid_local))
+                            )  
     return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "yes")
 
 
@@ -244,108 +178,6 @@ def f_201710370311030_predict_result_compare(probs, mdl, run_time, img, dir_resu
     labels = list(class_list.keys())
     return render_template('/201710370311030/result_compare.html', labels=labels,
                            probs=[0, 0], mdl=mdl, run_time=run_time, pred=idx_pred, img=img, result_img=dir_result_img, fid_local=fid_local, fid_global=fid_global, patch_input_manual=is_patch_input)
-
-# Select Model f_nim Brain Tumor Disease
-
-
-@app.route('/1/select')
-def f_201710370311030_select():
-    return render_template('/201710370311030/select.html', )
-
-
-@app.route('/1/pred_select', methods=['POST'])
-def f_201710370311030_predict_select():
-
-    chosen_model = request.form['select_model']
-    model_dict = {'Nama Model 1':   'static/model/201710370311030/model1.h5',  # Isi dengan Nama model dan path lokasi model disimpan (Pastikan menyimpan model dalam folder /static/model/nim/namamodel.h5)
-                  'Nama Model 2':   'static/model/201710370311030/model2.h5',
-                  # Jika pakai Json dan weight model saat menyimpan model gunakan kode ini
-                  'Nama json Model 1':   ['static/model/201710370311030/js/model_js1.json', 'static/model/201710370311030/js/model_weight_js1.h5'],
-                  # Beri kode nama "_js" tanpa petik di akhir nama model
-                  'Nama json Model 2':   ['static/model/201710370311030/js/model_js2.json', 'static/model/201710370311030/js/model_weight_js2.h5']
-                  }
-    if chosen_model in model_dict:
-        if "_js" in m:  # dari kode nama model _js selanjutnya program akan membaca model format json dengan block kode dalam if
-            json_file = open(model_dict[m][0], 'r')
-            loaded_model_json = json_file.read()
-            json_file.close()
-            model = model_from_json(loaded_model_json)
-            model.load_weights(model_dict[m][1])
-        else:  # bila nama model tidak mengandung kode nama _js maka model akan di muat menggunakan load_model()
-            model = load_model(model_dict[m])
-    else:
-        model = load_model(model_dict[0])  # load default model
-
-    filename = request.form.get('input_image')
-
-    # preprocessing gambar lakukan sesuai dengan preprocessing yang sama saat proses training
-    img = cv2.cvtColor(np.array(Image.open(filename)), cv2.COLOR_BGR2RGB)
-    img = np.expand_dims(cv2.resize(img, model.layers[0].input_shape[0][1:3] if not model.layers[0].input_shape[1:3]
-                         else model.layers[0].input_shape[1:3]).astype('float32') / 255, axis=0)
-
-    # mulai prediki
-    start = time.time()
-    pred = model.predict(img)[0]
-    runtimes = round(time.time()-start, 4)  # hitung lama prediksi
-
-    respon_model = [round(elem * 100, 2)
-                    for elem in pred]  # hitung nilai prediksi
-
-    return f_201710370311030_predict_result_select(chosen_model, runtimes, respon_model, filename[7:])
-
-
-@app.route('/1/pred_selects', methods=['POST'])
-def f_201710370311030_predicts_select():
-
-    chosen_model = request.form['select_model']
-    model_dict = {'Nama Model 1':   'static/model/201710370311030/model1.h5',  # Isi dengan Nama model dan path lokasi model disimpan (Pastikan menyimpan model dalam folder /static/model/nim/namamodel.h5)
-                  'Nama Model 2':   'static/model/201710370311030/model2.h5',
-                  # Jika pakai Json dan weight model saat menyimpan model gunakan kode ini
-                  'Nama json Model 1':   ['static/model/201710370311030/js/model_js1.json', 'static/model/201710370311030/js/model_weight_js1.h5'],
-                  # Beri kode nama "_js" tanpa petik di akhir nama model
-                  'Nama json Model 2':   ['static/model/201710370311030/js/model_js2.json', 'static/model/201710370311030/js/model_weight_js2.h5']
-                  }
-
-    if chosen_model in model_dict:
-        if "_js" in chosen_model:  # dari kode nama model _js selanjutnya program akan membaca model format json dengan block kode dalam if
-            json_file = open(model_dict[chosen_model][0], 'r')
-            loaded_model_json = json_file.read()
-            json_file.close()
-            model = model_from_json(loaded_model_json)
-            model.load_weights(model_dict[chosen_model][1])
-        else:  # bila nama model tidak mengandung kode nama _js maka model akan di muat menggunakan load_model()
-            model = load_model(model_dict[chosen_model])
-    else:
-        model = load_model(model_dict[0])  # load default model
-
-    file = request.files["file"]
-    file.save(os.path.join('static', 'temp.jpg'))
-
-    # preprocessing gambar lakukan sesuai dengan preprocessing yang sama saat proses training
-    img = cv2.cvtColor(np.array(Image.open(file)), cv2.COLOR_BGR2RGB)
-    img = np.expand_dims(cv2.resize(img, model.layers[0].input_shape[0][1:3] if not model.layers[0].input_shape[1:3]
-                         else model.layers[0].input_shape[1:3]).astype('float32') / 255, axis=0)
-
-    # mulai prediki
-    start = time.time()
-    pred = model.predict(img)[0]
-    runtimes = round(time.time()-start, 4)  # hitung lama prediksi
-
-    respon_model = [round(elem * 100, 2)
-                    for elem in pred]  # hitung nilai prediksi
-
-    return f_201710370311030_predict_result_select(chosen_model, runtimes, respon_model, 'temp.jpg')
-
-
-def f_201710370311030_predict_result_select(model, run_time, probs, img):
-    # isi dengan nama kelas 1 sampai ke n sesuai dengan urutan kelas data pada classification report key di isi dengan nama kelas dan value di isi dengan urutan kelas dimulai dari 0
-    class_list = {'Nama Kelas 1': 0, 'Nama Kelas 2': 1}
-    idx_pred = probs.index(max(probs))
-    labels = list(class_list.keys())
-    return render_template('/201710370311030/result_select.html', labels=labels,
-                           probs=probs, model=model, pred=idx_pred,
-                           run_time=run_time, img=img)
-
 
 """ Edit End """
 
