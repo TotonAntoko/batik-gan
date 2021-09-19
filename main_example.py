@@ -41,9 +41,9 @@ def add_header(r):
 #     # https://riset.informatika.umm.ac.id/area_of_interest/{aoi_id}
 #     return redirect('https://riset.informatika.umm.ac.id/area_of_interest/1')
 # Compare Model f_nim Brain Tumor Disease
-@app.route('/1/compare')
+@app.route('/1/generate')
 def f_201710370311030_compare():
-    return render_template('/201710370311030/compare.html', )
+    return render_template('/201710370311030/generate.html', )
 
 
 @app.route('/1/pred_comp', methods=['POST'])
