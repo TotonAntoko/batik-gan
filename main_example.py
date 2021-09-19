@@ -105,7 +105,7 @@ def f_201710370311030_generate_compare():  # Ganti nim dengan NIM anda misal : _
         dir_result_img.append("result/201710370311030/{}.png".format(m))
         running_time.append(round(time.time()-start, 4)
                             )  
-    return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "no")
+    return f_201710370311030_generate_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "no")
 
 # Method generate input patch from user
 @app.route('/1/generate_comps', methods=['POST'])
@@ -167,16 +167,16 @@ def f_201710370311030_generates_compare():
         dir_result_img.append("result/201710370311030/{}.png".format(m))
         running_time.append(round(time.time()-start, 4)
                             )  
-    return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "yes")
+    return f_201710370311030_generate_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "yes")
 
 
-def f_201710370311030_predict_result_compare(probs, mdl, run_time, img, dir_result_img, fid_local, fid_global, is_patch_input):
+def f_201710370311030_generate_result_compare(probs, mdl, run_time, img, dir_result_img, fid_local, fid_global, is_patch_input):
 
     # isi dengan nama kelas 1 sampai ke n sesuai dengan urutan kelas data pada classification report key di isi dengan nama kelas dan value di isi dengan urutan kelas dimulai dari 0
     class_list = {'Nama Kelas 1': 0, 'Nama Kelas 2': 1}
     idx_pred = [0, 0]  # [i.index(max(i)) for i in probs]
     labels = list(class_list.keys())
-    return render_template('/201710370311030/result_compare.html', labels=labels,
+    return render_template('/201710370311030/result_generate.html', labels=labels,
                            probs=[0, 0], mdl=mdl, run_time=run_time, pred=idx_pred, img=img, result_img=dir_result_img, fid_local=fid_local, fid_global=fid_global, patch_input_manual=is_patch_input)
 
 """ Edit End """
