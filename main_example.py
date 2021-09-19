@@ -46,7 +46,7 @@ def f_201710370311030_compare():
     return render_template('/201710370311030/generate.html', )
 
 # Method generate input patch selected
-@app.route('/1/pred_comp', methods=['POST'])
+@app.route('/1/generate_comp', methods=['POST'])
 def f_201710370311030_generate_compare():  # Ganti nim dengan NIM anda misal : _2132131312
     # initialitation variable
     respon_model = []
@@ -108,7 +108,7 @@ def f_201710370311030_generate_compare():  # Ganti nim dengan NIM anda misal : _
     return f_201710370311030_predict_result_compare(respon_model, chosen_model, running_time, list_image_patch, dir_result_img, fid_local, fid_global, "no")
 
 # Method generate input patch from user
-@app.route('/1/pred_comps', methods=['POST'])
+@app.route('/1/generate_comps', methods=['POST'])
 def f_201710370311030_generates_compare():
 
     respon_model = []
