@@ -159,6 +159,22 @@
           </span>
         </div>
       </div>
+      <div class="row" style="padding: 15px;">
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <p style="font-weight: bold; color: black;">Evaluate FID : </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="form-check form-check-inline">
+            <input type="radio" name="is_evaluate_fid" id="option_1" value="no" checked style="margin-right: 5px;">
+            <label for="option_1">No</label>
+            <input type="radio" name="is_evaluate_fid" id="option_2" value="yes"
+              style="margin-left: 10px;margin-right: 5px;">
+            <label for="option_2">Yes</label>
+          </div>
+        </div>
+      </div>
       <div class="container-login100-form-btn">
         <button class="login100-form-btn" id="send" type="submit">
           Execute
@@ -215,94 +231,143 @@
         </div>
       </div>
       <!-- EDIT START-->
-      <div class="row">
+      <div class="row" style="justify-content: center;">
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch1" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar1.jpg" />
+            value="static/main/images/predict/201710370311030/patch1.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch1">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar1.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch1.jpg')}}" />
           </label>
 
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch2" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar2.jpg" />
+            value="static/main/images/predict/201710370311030/patch2.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch2">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar2.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch2.jpg')}}" />
           </label>
 
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch3" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar3.jpg" />
+            value="static/main/images/predict/201710370311030/patch3.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch3">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar3.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch3.jpg')}}" />
           </label>
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch4" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar4.jpg" />
+            value="static/main/images/predict/201710370311030/patch4.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch4">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar4.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch4.jpg')}}" />
           </label>
 
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch5" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar5.jpg" />
+            value="static/main/images/predict/201710370311030/patch5.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch5">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar5.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch5.jpg')}}" />
           </label>
         </div>
-      </div>
-      <div class="row">
+
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch6" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar6.jpg" />
+            value="static/main/images/predict/201710370311030/patch6.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch6">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar6.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch6.jpg')}}" />
           </label>
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch7" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar7.jpg" />
+            value="static/main/images/predict/201710370311030/patch7.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch7">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar7.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch7.jpg')}}" />
           </label>
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch8" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar8.jpg" />
+            value="static/main/images/predict/201710370311030/patch8.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch8">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar8.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch8.jpg')}}" />
           </label>
         </div>
+      </div>
+      <div class="row" style="justify-content: center;">
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch9" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar9.jpg" />
+            value="static/main/images/predict/201710370311030/patch9.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch9">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar9.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch9.jpg')}}" />
           </label>
         </div>
         <div class="column" style="background-color:rgb(235, 235, 235);">
           <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch10" class="checkbox-img-patch"
-            value="static/main/images/predict/201710370311030/gambar10.jpg" />
+            value="static/main/images/predict/201710370311030/patch10.jpg" />
           <label class="img-patch" for="checkbox-select-img-patch10">
-            <img style="height: 235px;width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
-              src="{{ url_for('static', filename='main/images/predict/201710370311030/gambar10.jpg')}}" />
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch10.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch11" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch11.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch11">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch11.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch12" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch12.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch12">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch12.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch13" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch13.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch13">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch13.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch14" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch14.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch14">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch14.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch15" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch15.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch15">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch15.jpg')}}" />
+          </label>
+        </div>
+        <div class="column" style="background-color:rgb(235, 235, 235);">
+          <input name="select_image_patch" type="checkbox" id="checkbox-select-img-patch16" class="checkbox-img-patch"
+            value="static/main/images/predict/201710370311030/patch16.jpg" />
+          <label class="img-patch" for="checkbox-select-img-patch16">
+            <img style="max-height: 235px;max-width: 235px;padding-left: 10%;padding-right: 10%;padding-bottom: 10%;"
+              src="{{ url_for('static', filename='main/images/predict/201710370311030/patch16.jpg')}}" />
           </label>
         </div>
       </div>
-      <div class="row" style=" width: 29%; padding: 15px;">
+      <div class="row" style="padding: 15px;">
         <div class="column">
           <div class="form-check form-check-inline">
             <p style="font-weight: bold; color: black;">Evaluate FID : </p>
@@ -317,7 +382,6 @@
             <label for="option_2">Yes</label>
           </div>
         </div>
-        <p>Note : Evaluation can make the waiting time longer.</p>
       </div>
       <!-- EDIT END -->
       <div class="container-login100-form-btn">

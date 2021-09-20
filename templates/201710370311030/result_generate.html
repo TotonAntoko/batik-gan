@@ -112,10 +112,25 @@
 
               <!-- <p style="margin-bottom: 6px;">Confidance : % | Generate time : {{run_time[x]}} second
               </p> -->
+              {% if fid_global[x] != ""%}
               <p style="margin-bottom: 0px; line-height: 20px;">FID Global : {{fid_global[x]}}</p>
+              {% endif %}
+              {% if fid_local[x] != ""%}
               <p style="margin-bottom: 10px; line-height: 20px;">FID Local : {{fid_local[x]}}</p>
+              {% endif %}
               <img src="{{ url_for('static', filename=result_img[x]) }}" alt="" class="img-fluid"
                 style="height:128px; width:128px; margin-bottom: 6px;">
+
+              {% if patch_input_manual == "no" %}
+              <p style="margin-top: 15px;">Real Image</p>
+              <img src="{{ url_for('static', filename=real_img_temp[x][0]) }}" alt="" class="img-fluid"
+                style="height:128px; width:128px; margin-bottom: 6px;">
+              <img src="{{ url_for('static', filename=real_img_temp[x][1]) }}" alt="" class="img-fluid"
+                style="height:128px; width:128px; margin-bottom: 6px;">
+              <!-- <p>{{real_img_temp[x]}}</p> -->
+              <!-- <p>{{img[0][48:-4]}}</p>
+              <p>{{img[1][48:-4]}}</p> -->
+              {% endif %}
             </div>
             {% endfor %}
 
