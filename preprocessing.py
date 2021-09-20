@@ -47,8 +47,8 @@ class DataPipeline:
         path = 'static/dataset/201710370311030/dataset_batik/'
         data_patch = self.load_data(path + 'Patch/', (32, 32))
 
-        patch_a = data_patch[[i for i in range(326) if i % 2 == 0]]
-        patch_b = data_patch[[i for i in range(326) if i % 2 != 0]]
+        patch_a = data_patch[[i for i in range(32) if i % 2 == 0]]
+        patch_b = data_patch[[i for i in range(32) if i % 2 != 0]]
 
         dataset = tf.data.Dataset.from_tensor_slices((patch_a, patch_b))
 

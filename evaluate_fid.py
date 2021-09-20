@@ -9,19 +9,22 @@ from keras.applications.inception_v3 import preprocess_input
 class Evaluation:
     def __init__(self, dataset, model):
         self.inception_model = InceptionV3(
-            include_top=False, pooling='avg', input_shape=(75, 75, 3))
+            include_top=False, pooling='avg', input_shape=(299, 299, 3), weights=None)
         self.dataset = dataset
         self.model = model
 
     # calculate frechet inception distance
     def calculate_fid(self, images1, images2):
+        local_weights_file = "static/model/201710370311030/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+        self.inception_model.load_weights(local_weights_file)
+
         # # calculate activations
         act1 = self.inception_model.predict(images1)
         act2 = self.inception_model.predict(images2)
         # calculate mean and covariance statistics
         mu1, sigma1 = act1.mean(axis=0), np.cov(act1, rowvar=False)
         mu2, sigma2 = act2.mean(axis=0), np.cov(act2, rowvar=False)
-        # calculate sum squared difference between means
+        # calculate sum squared differencestyle="width: 10%;" between means
         ssdiff = np.sum((mu1 - mu2)**2.0)
         # calculate sqrt of product between cov
         covmean = sqrtm(sigma1.dot(sigma2))
@@ -55,8 +58,8 @@ class Evaluation:
         patch = np.concatenate([patchA, patchB], axis=0)
         img_gen = self.split_img(batik_generate)
 
-        img_gen = self.scale_images(img_gen, (75, 75, 3))
-        patch = self.scale_images(patch, (75, 75, 3))
+        img_gen = self.scale_images(img_gen, (299, 299, 3))
+        patch = self.scale_images(patch, (299, 299, 3))
 
         # pre-process images
         img_gen = preprocess_input(img_gen)
@@ -71,8 +74,8 @@ class Evaluation:
         # ID = list(dict.fromkeys(ID_A + ID_B))  # ID Select
         # real_select = np.array([real[index] for index in ID]) # Real Batik Select from ID
 
-        batik_generate = self.scale_images(batik_generate, (75, 75, 3))
-        real_select = self.scale_images(real, (75, 75, 3))
+        batik_generate = self.scale_images(batik_generate, (299, 299, 3))
+        real_select = self.scale_images(real, (299, 299, 3))
 
         # pre-process images
         batik_generate = preprocess_input(batik_generate)
